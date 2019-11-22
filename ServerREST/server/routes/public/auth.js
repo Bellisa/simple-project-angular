@@ -1,32 +1,68 @@
 const router = require('express').Router();
-const pool = require("../../db/db");
 const tables = require("../../db/models/tables");
+const pool = require("../../db/db");
+
 
 router.post('/registration', (req,res)=>{
     res.send('Registration')
 })
 
-router.get('/login', (req,res)=>{
-    pool.getConnection((err, connection) =>{
+router.get('/login', async(req,res)=>{
+
+ pool.getConnection((err,conect)=>{
+    if (err) {
+      if (err.code === 'PROTOCOL_CONNECTION_LOST') {
+          console.error('Database connection was closed.')
+      }
+      if (err.code === 'ER_CON_COUNT_ERROR') {
+          console.error('Database has too many connections.')
+      }
+      if (err.code === 'ECONNREFUSED') {
+          console.error('Database connection was refused.')
+      }
+      return;
+  }
+  conect.query( `SELECT * FROM res_types`,(err,ress,rr)=>{
+    console.log(ress)
+    res.send({ res_types: ress });
+  }) 
+  })
+    
+  
+  /*try {
+    let someRows = await db.query( `SELECT * FROM res_types` );
+    console.log(someRows);
+    res.send({ res_types: 'ok' });
+
+  } catch ( err ) {
+    console.log(err,'not connected!')
+    res.status(404).send({ message: "error occured" });
+ß
+  } 
+
+*?
+   /* pool.getConnection((err, connection) =>{
         if (err) {
             console.log(err,'not connected!')
-            return;}// not connected!
+            res.status(404).send({ message: "error occured" });
+            return;
+          }// not connected!
       
         // Use the connection
-        connection.query(`select * from ${tables.res_types}`, function (error, results, fields) {
-          // When done with the connection, release it.
-          connection.release();
+        console.log('start',tables.res_types, connection)
+        connection.query("select * from ?? ",[`${tables.res_types}`] , (error, results, fields) => {
+
+          console.log(`select * from ${tables.res_types}`,  JSON.stringify(results),fields)
+          // When done with the connection, release it. ̰
+          
           if (error) {
             res.status(404).send({ message: "error occured" });
           } else {
-            res.status(201).send({ res_types: result });
+            res.send({ res_types: results });
           }
-          // Handle error after the release.
-          
-      
-          // Don't use the connection here, it has been returned to the pool.
+          connection.release();
         });
-      });
+      });*/
     });  
 
 module.exports = router;
