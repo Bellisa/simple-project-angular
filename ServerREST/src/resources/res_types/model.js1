@@ -1,0 +1,23 @@
+import Sequelize from 'sequelize'
+import { sequelize } from '../../services/sequelize'
+import LeagueModel from '../league/model'
+
+export default class ResTypesModel extends Sequelize.Model {}
+
+ResTypesModel.init({
+  id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    primaryKey: true,
+  },
+  name: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+}, {
+  sequelize,
+  modelName: 'res_types',
+  underscored: true,
+  paranoid: true,
+  timestamps: true,
+})
