@@ -16,7 +16,10 @@
     "db:migrate:undo:all": "node_modules/.bin/sequelize db:migrate:undo:all",
     "db:seed:all": "node_modules/.bin/sequelize db:seed:all",
     "db:seed:undo": "node_modules/.bin/sequelize db:seed:undo",
-    "db:seed:undo:all": "node_modules/.bin/sequelize db:seed:undo:all"
+    "db:seed:undo:all": "node_modules/.bin/sequelize db:seed:undo:all",
+    "test-init": "node node_modules/jasmine/bin/jasmine init",
+    "test": "jasmine --config=spec/support/jasmine.json",
+    "test-example": "jasmine examples"
   },
   "keywords": [],
   "author": "",
@@ -45,12 +48,12 @@
     "zipcodes": "^8.0.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.0",
     "@babel/cli": "^7.7.0",
     "@babel/core": "^7.7.2",
     "@babel/plugin-proposal-class-properties": "^7.7.0",
     "@babel/plugin-proposal-object-rest-spread": "^7.6.2",
-    "@babel/preset-env": "^7.7.1",
+    "@babel/preset-env": "^7.7.6",
+    "@babel/register": "^7.7.4",
     "babel-core": "^6.26.3",
     "babel-eslint": "^10.0.3",
     "eslint": "^6.6.0",
@@ -59,6 +62,8 @@
     "eslint-plugin-node": "^10.0.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
+    "jasmine": "^3.5.0",
+    "nodemon": "^2.0.0",
     "pre-commit": "^1.2.2",
     "rimraf": "^3.0.0"
   }

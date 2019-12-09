@@ -9,5 +9,10 @@ const { validate } = new Validator()
 
 router.post('/login', validate({ schema: LoginUserSchema }), controller.login)
 router.post('/register', validate({ schema: RegistrationUserSchema }), controller.register)
+router.get('/', (req,response)=>{
+    response.status(200).send({
+        message: 'Success'
+      })
+})
 
 export default router
