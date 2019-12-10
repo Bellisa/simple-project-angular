@@ -9,7 +9,6 @@ import swaggerUi from 'swagger-ui-express'
 import swaggerDocument from './swagger'
 
 config()
-console.log(models);
 const { PORT } = process.env
 
 export const app = express()

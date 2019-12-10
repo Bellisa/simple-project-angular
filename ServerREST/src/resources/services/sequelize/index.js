@@ -30,12 +30,12 @@ export const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
 })
 
 const models = {
-   /* answrs: require('../../answers/model'),
+    answers: require('../../answers/model'),
     categories: require('../../categories/model'),
     links: require('../../links/model'),
     questions: require('../../questions/model'),
-    res_types: require('../../res_types/model'),
-    sub_categories: require('../../sub-categories/model'),*/
+    
+    sub_categories: require('../../sub-categories/model'),
     users: require('../../users/model')
     /*user: require('../../resources/account/model'),
     owner: require('../../resources/owner/model'),
@@ -45,10 +45,10 @@ const models = {
     nflTeam: require('../../resources/nfl-team/model'),
     team: require('../../resources/team/model'),
     player: require('../../resources/player/model'),
-    address: require('../../resources/address/model'),
+    address: require('../../resources/address/model'),*/
   }
-  */
-}
+  
+
 
 // todo
 // Object.keys(models).forEach(modelName => {

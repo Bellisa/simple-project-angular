@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'
 import { EmptyResultError } from 'sequelize'
 import { sequelize } from '../services/sequelize'
-import UserModel from '../users/model'
+import UsersModel from '../users/model'
 
 const { JWT_KEY } = process.env
 
@@ -42,7 +42,8 @@ export default class AuthService {
             // start transaction
             transaction = await sequelize.transaction({ autocommit: true })
             // create account
-            const result = await UserModel.create(user, { transaction })
+            const result = await UsersModel.create(user, { transaction })
+            const res2 = await transaction.commit()
             return result;
         } catch (e) {
             if (transaction) {

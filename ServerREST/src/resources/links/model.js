@@ -1,32 +1,32 @@
 import Sequelize from 'sequelize'
 import { sequelize } from '../services/sequelize'
 
-export default class UsersModel extends Sequelize.Model {}
+export default class LinksModel extends Sequelize.Model {}
 
-UsersModel.init({
-  id_user: {
+LinksModel.init({
+  id_link: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
     primaryKey: true,
   },
-  login: {
-    type: Sequelize.STRING(45),
+  id_res: {
+    type: Sequelize.INTEGER,
+    allowNull: true,
+  },
+  id_type: {
+    type: Sequelize.ENUM('answer', 'question', 'category', 'sub_category'), // clarify todo
     allowNull: false,
   },
-  first_name: {
-    type: Sequelize.STRING(50),
+  res_url: {
+    type: Sequelize.STRING(255),
+    allowNull: true,
+  },
+  descroption: {
+    type: Sequelize.TEXT,
     allowNull: false,
   },
-  last_name: {
-    type: Sequelize.STRING(50),
-    allowNull: false,
-  },
-  password: {
-    type: Sequelize.STRING(25),
-    allowNull: false,
-  },
-  email: {
-    type: Sequelize.STRING(45),
+  sort_index: {
+    type: Sequelize.INTEGER,
     allowNull: true,
   },
   created_at: {
@@ -43,7 +43,7 @@ UsersModel.init({
   },
 }, {
   sequelize,
-  modelName: 'users',
+  modelName: 'links',
   underscored: true,
   paranoid: true,
   timestamps: true,

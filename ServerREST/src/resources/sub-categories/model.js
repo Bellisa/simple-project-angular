@@ -1,32 +1,33 @@
 import Sequelize from 'sequelize'
 import { sequelize } from '../services/sequelize'
+import CategoriesModel from '../categories/model'
 
-export default class UsersModel extends Sequelize.Model {}
+export default class SubCategoriesModel extends Sequelize.Model {}
 
-UsersModel.init({
-  id_user: {
+SubCategoriesModel.init({
+  id_sub_category: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
     primaryKey: true,
   },
-  login: {
-    type: Sequelize.STRING(45),
+  id_category: {
+    type: Sequelize.INTEGER,
+    references: {
+      model: CategoriesModel,
+      key: 'id_category',
+    },
     allowNull: false,
   },
-  first_name: {
-    type: Sequelize.STRING(50),
+  sort_index: {
+    type: Sequelize.INTEGER,
     allowNull: false,
   },
-  last_name: {
-    type: Sequelize.STRING(50),
+  title: {
+    type: Sequelize.STRING(250),
     allowNull: false,
   },
-  password: {
-    type: Sequelize.STRING(25),
-    allowNull: false,
-  },
-  email: {
-    type: Sequelize.STRING(45),
+  description: {
+    type: Sequelize.TEXT,
     allowNull: true,
   },
   created_at: {
@@ -43,7 +44,7 @@ UsersModel.init({
   },
 }, {
   sequelize,
-  modelName: 'users',
+  modelName: 'sub_categories',
   underscored: true,
   paranoid: true,
   timestamps: true,

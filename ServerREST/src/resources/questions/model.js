@@ -1,42 +1,33 @@
 import Sequelize from 'sequelize'
-import { sequelize } from '../../services/sequelize'
-import LeagueModel from '../league/model'
-import TeamModel from '../team/model'
+import { sequelize } from '../services/sequelize'
+import UsersModel from '../users/model'
 
-export default class PlayerModel extends Sequelize.Model {}
+export default class QuestionsModel extends Sequelize.Model {}
 
-PlayerModel.init({
-  id: {
+QuestionsModel.init({
+  id_question: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
     primaryKey: true,
   },
-  league_id: {
+  id_user: {
     type: Sequelize.INTEGER,
     references: {
-      model: LeagueModel,
-      key: 'id',
+      model: UsersModel,
+      key: 'id_user',
     },
     allowNull: false,
   },
-  team_id: {
+  sort_index: {
     type: Sequelize.INTEGER,
-    references: {
-      model: TeamModel,
-      key: 'id',
-    },
     allowNull: false,
   },
-  first_name: {
-    type: Sequelize.STRING(100),
+  question_text_ru: {
+    type: Sequelize.TEXT,
     allowNull: false,
   },
-  last_name: {
-    type: Sequelize.STRING(100),
-    allowNull: false,
-  },
-  jersey_size: {
-    type: Sequelize.ENUM('s', 'm', 'l', 'xl'), // clarify todo
+  question_text_eng: {
+    type: Sequelize.TEXT,
     allowNull: false,
   },
   created_at: {
@@ -53,7 +44,7 @@ PlayerModel.init({
   },
 }, {
   sequelize,
-  modelName: 'player',
+  modelName: 'questions',
   underscored: true,
   paranoid: true,
   timestamps: true,

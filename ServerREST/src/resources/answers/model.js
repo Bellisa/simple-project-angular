@@ -1,32 +1,38 @@
 import Sequelize from 'sequelize'
 import { sequelize } from '../services/sequelize'
+import QuestionModel from '../questions/model'
 
-export default class UsersModel extends Sequelize.Model {}
+export default class AnswersModel extends Sequelize.Model {}
 
-UsersModel.init({
-  id_user: {
+AnswersModel.init({
+  id_answer: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
     primaryKey: true,
   },
-  login: {
-    type: Sequelize.STRING(45),
+  id_question: {
+    type: Sequelize.INTEGER,
+    references: {
+      model: QuestionModel,
+      key: 'id_question',
+    },
     allowNull: false,
   },
-  first_name: {
-    type: Sequelize.STRING(50),
-    allowNull: false,
+  
+  description_ru: {
+    type: Sequelize.TEXT,
+    allowNull: true,
   },
-  last_name: {
-    type: Sequelize.STRING(50),
-    allowNull: false,
+  description_eng: {
+    type: Sequelize.TEXT,
+    allowNull: true,
   },
-  password: {
-    type: Sequelize.STRING(25),
-    allowNull: false,
+  answer_ru: {
+    type: Sequelize.TEXT,
+    allowNull: true,
   },
-  email: {
-    type: Sequelize.STRING(45),
+  answer_eng: {
+    type: Sequelize.TEXT,
     allowNull: true,
   },
   created_at: {
@@ -43,7 +49,7 @@ UsersModel.init({
   },
 }, {
   sequelize,
-  modelName: 'users',
+  modelName: 'answers',
   underscored: true,
   paranoid: true,
   timestamps: true,
